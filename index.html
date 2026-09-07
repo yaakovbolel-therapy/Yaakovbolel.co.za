@@ -609,6 +609,7 @@ html.no-js .fade{opacity:1;transform:none;}
 window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>20));
 function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
 function toggleFaq(btn){const item=btn.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!open)item.classList.add('open');}
+const FORMSPREE_ENDPOINT='https://formspree.io/f/YOUR_FORM_ID'; // replace YOUR_FORM_ID once the Formspree account is set up
 function handleSubmit(btn){
   const form=document.getElementById('contactForm');
   if(!form.reportValidity()) return;
@@ -624,6 +625,10 @@ function handleSubmit(btn){
   if(msg) text+=` Message: ${msg}`;
   const url='https://wa.me/27782816690?text='+encodeURIComponent(text);
   btn.textContent='Opening WhatsApp ✓';btn.style.background='#4a7a38';btn.disabled=true;
+  if(!FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')){
+    fetch(FORMSPREE_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({firstName:fn,lastName:ln,email,phone,service,message:msg})}).catch(()=>{});
+  }
   window.open(url,'_blank','noopener');
   setTimeout(()=>{btn.textContent='Send Message';btn.style.background='';btn.disabled=false;form.reset();},2500);
 }

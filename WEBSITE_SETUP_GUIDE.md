@@ -6,6 +6,17 @@ This is a straightforward way to get a website live: free hosting, a clean file 
 
 ---
 
+## Decisions made for this site
+
+This guide was a starting reference, not the final word — here's what was actually decided for yaakovbolel.co.za, which may differ from the generic advice below:
+
+- **Contact form:** dual submission — the same "Send Message" click opens WhatsApp *and* submits to Formspree by email. Not WhatsApp-only, not Formspree-only.
+- **Cloudflare:** skipped. Not in front of the site.
+- **Analytics:** none. No Plausible, no Fathom, no tracking of any kind.
+- **Hosting/domain:** live at both `www.yaakovbolel.co.za` and `yaakovbolel.co.za`, deploying from the `claude/google-drive-website-folder-7cv93c` branch (not `main`).
+
+---
+
 ## 1. Hosting: GitHub Pages
 
 GitHub Pages is free hosting built directly into a GitHub repository. It's a great fit for a small, simple site like this — no server to manage, no hosting bill.
@@ -63,15 +74,15 @@ None of this requires ongoing cost or a background in web development. The whole
 
 ---
 
-## Quick Checklist
+## Quick Checklist (actual status for this site)
 
-- [ ] Create the GitHub repo and enable Pages
-- [ ] Add the CNAME file and point the domain's DNS at GitHub
-- [ ] Tick "Enforce HTTPS" in Pages settings once DNS resolves
-- [ ] Add a .gitignore file
-- [ ] Set up the contact form (Formspree / Netlify Forms / Getform) with spam protection
-- [ ] Add a crisis-line disclaimer near the form, if this is a health-related site
-- [ ] Add a Privacy Policy page
-- [ ] Turn on Dependabot alerts and confirm secret scanning
-- [ ] Optional: add Cloudflare for extra protection and security headers
-- [ ] Optional: add privacy-friendly analytics (or none at all)
+- [x] Create the GitHub repo and enable Pages
+- [x] Add the CNAME file and point the domain's DNS at GitHub
+- [ ] Tick "Enforce HTTPS" in Pages settings — waiting on GitHub to finish issuing the certificate
+- [x] Add a .gitignore file
+- [x] Set up the contact form — WhatsApp + Formspree, both fire on the same click (needs a real Formspree form ID dropped into `index.html` to go live — see `FORMSPREE_ENDPOINT` near the bottom of the file)
+- [x] Add a crisis-line disclaimer near the form
+- [x] Add a Privacy Policy page
+- [ ] Turn on Dependabot alerts and confirm secret scanning — confirmed currently OFF, needs a manual toggle in repo settings
+- [x] Cloudflare — decided against, skipped
+- [x] Analytics — decided against, none in use
