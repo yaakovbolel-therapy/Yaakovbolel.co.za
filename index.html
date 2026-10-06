@@ -374,6 +374,161 @@ html.no-js .fade{opacity:1;transform:none;}
   .hero-logo{width:92vw;}
   .hero-tagline{font-size:18px;}
 }
+
+/* Section header + FAQ title spacing (formerly inline styles) */
+.sec-head{max-width:560px;margin-bottom:48px;}
+#faq .title{margin-bottom:32px;}
+/* email + phone share a row on desktop; stacked on small screens with no extra gap */
+@media(max-width:900px){.form-row-contact{gap:0;}}
+
+/* ══════════════════════════════════════════
+   DESKTOP — every section fits one screen
+   (laptops and desktops; phones/tablets keep the flowing layout above)
+   Sizes scale with viewport height so nothing spills past the fold.
+══════════════════════════════════════════ */
+@media(min-width:901px) and (min-height:560px){
+  :root{
+    --nav-h:clamp(60px,9vh,88px);
+    --pad:clamp(10px,2.4vh,36px);   /* section top/bottom breathing room */
+    --gap:clamp(8px,1.8vh,22px);    /* gaps between blocks */
+    --fs:clamp(12.5px,1.85vh,15px); /* body copy */
+    --fs-s:clamp(11.5px,1.6vh,13px);/* small copy */
+  }
+
+  nav{height:var(--nav-h);}
+  .nav-icon{height:calc(var(--nav-h) - 14px);}
+
+  /* every section is exactly one screen tall, content centred below the nav */
+  section{
+    min-height:100vh;min-height:100svh;
+    padding:calc(var(--nav-h) + var(--pad)) 5% var(--pad);
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .label{margin-bottom:clamp(4px,.8vh,10px);}
+  .title{font-size:clamp(24px,4.6vh,44px);margin-bottom:clamp(6px,1.2vh,16px);}
+  .sub{font-size:var(--fs);line-height:1.6;margin-bottom:var(--gap);max-width:640px;}
+  .wave-accent{margin:calc(var(--gap) * -.4) 0 var(--gap);width:clamp(80px,12vh,120px);height:auto;}
+
+  /* compact two-column header: title left, intro right */
+  .sec-head,.invest-header{
+    max-width:none;margin-bottom:var(--gap);
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+    grid-template-areas:"label sub" "title sub" "wave sub";
+    column-gap:5vw;align-items:end;
+  }
+  .sec-head .label,.invest-header .label{grid-area:label;}
+  .sec-head .title,.invest-header .title{grid-area:title;margin-bottom:0;}
+  .sec-head .sub,.invest-header .sub{grid-area:sub;margin-bottom:0;align-self:center;}
+  .sec-head .wave-accent,.invest-header .wave-accent{grid-area:wave;margin:clamp(4px,.8vh,10px) 0 0;}
+  /* titles run on one line here (the space after each <br> keeps the words apart) */
+  .sec-head .title br,.invest-header .title br{display:none;}
+  /* use spare height where there is some */
+  .invest-header{margin-bottom:clamp(10px,2.8vh,30px);}
+  .about-text .title{margin-bottom:clamp(8px,1.8vh,20px);}
+
+  /* ── HERO: the logo takes whatever height is left after the text ── */
+  .hero{
+    height:100vh;height:100svh;min-height:600px;
+    padding:calc(var(--nav-h) + var(--pad)) 5% var(--pad);
+    justify-content:flex-start;
+  }
+  .hero-logo{
+    flex:1 1 0;min-height:110px;max-height:640px;
+    width:min(680px,90vw);height:auto;
+    object-fit:contain;
+    margin:0 auto var(--gap);
+  }
+  .hero-tagline{font-size:clamp(17px,3.2vh,26px);margin-bottom:var(--gap);flex:none;}
+  .hero-sub{font-size:var(--fs);line-height:1.6;margin:0 auto var(--gap);flex:none;}
+  .hero-actions{margin-bottom:clamp(6px,1.2vh,16px);flex:none;}
+  .btn,.btn-ghost{padding:clamp(8px,1.5vh,14px) 30px;font-size:clamp(13px,1.9vh,15px);}
+  .hero-explore{margin-bottom:var(--gap);flex:none;}
+  .trust{padding-top:var(--gap);gap:8px 20px;flex:none;}
+
+  /* ── ABOUT ── */
+  .about-grid{gap:5vw;align-items:center;}
+  .about-text p{font-size:var(--fs);line-height:1.65;margin-bottom:var(--gap);}
+  .cred-list{display:grid;grid-template-columns:1fr 1fr;gap:clamp(6px,1.2vh,10px);}
+  .about-photo{grid-column:1 / -1;width:clamp(72px,15vh,132px);margin:0 auto;}
+  .cred{padding:clamp(7px,1.4vh,15px) 14px;}
+  .cred-text{font-size:var(--fs-s);line-height:1.4;}
+  .cred-text span{font-size:clamp(10.5px,1.5vh,12px);}
+
+  /* ── HOW IT WORKS ── */
+  .invest-grid{gap:var(--gap);margin-bottom:var(--gap);}
+  .invest-card{padding:clamp(12px,2.2vh,26px) clamp(14px,1.8vw,26px);}
+  .invest-num{font-size:clamp(24px,4.4vh,40px);margin-bottom:clamp(4px,1vh,12px);}
+  .invest-card h3{font-size:clamp(16px,2.5vh,20px);margin-bottom:clamp(4px,.8vh,10px);line-height:1.2;}
+  .invest-card p{font-size:var(--fs);line-height:1.55;}
+  .invest-bottom{padding-top:var(--gap);}
+  .invest-bottom-label{margin-bottom:clamp(6px,1.2vh,16px);}
+  .mod-tags{gap:clamp(5px,1vh,9px);}
+  .mod{font-size:var(--fs-s);padding:clamp(3px,.7vh,6px) 13px;}
+
+  /* ── SERVICES ── */
+  .services-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);}
+  /* card = icon + title on one row, then description, then "what you'll gain" pinned to the bottom */
+  .svc{
+    padding:clamp(10px,1.8vh,22px) clamp(14px,1.6vw,22px);
+    display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto 1fr;
+    column-gap:clamp(8px,.9vw,12px);align-content:stretch;
+  }
+  .svc-icon{grid-column:1;grid-row:1;width:clamp(26px,4vh,36px);height:clamp(26px,4vh,36px);margin:0;align-self:center;}
+  .svc-icon svg{width:clamp(14px,2.2vh,20px);height:clamp(14px,2.2vh,20px);}
+  .svc h3{grid-column:2;grid-row:1;align-self:center;font-size:clamp(16px,2.5vh,20px);margin:0;line-height:1.2;}
+  .svc-desc{grid-column:1 / -1;grid-row:2;font-size:var(--fs-s);line-height:1.5;margin:clamp(5px,1vh,10px) 0 clamp(5px,1vh,10px);}
+  .svc-tools{grid-column:1 / -1;grid-row:3;align-self:end;margin-top:0;padding-top:clamp(5px,.9vh,10px);
+    font-size:clamp(11px,1.5vh,12.5px);line-height:1.5;}
+  .svc-tools-label{display:inline;margin:0 6px 0 0;font-size:10.5px;}
+  .svc-tools p{display:inline;font-size:clamp(11px,1.5vh,12.5px);line-height:1.5;}
+  .for-men{position:absolute;top:clamp(8px,1.4vh,14px);right:clamp(10px,1.2vw,16px);margin:0;padding:2px 9px;}
+
+  /* ── COMMUNITY ── */
+  .comm-grid{gap:var(--gap);}
+  .comm-head{padding:clamp(12px,2.2vh,28px) 24px clamp(8px,1.6vh,20px);}
+  .comm-emoji{width:clamp(20px,3.2vh,28px);height:clamp(20px,3.2vh,28px);margin-bottom:clamp(3px,.8vh,10px);}
+  .comm-head h3{font-size:clamp(16px,2.5vh,20px);}
+  .comm-body{padding:clamp(10px,2vh,24px) 24px;}
+  .comm-body p{font-size:var(--fs);line-height:1.55;margin-bottom:clamp(6px,1.2vh,12px);}
+  .comm-offer{font-size:var(--fs-s);line-height:1.55;padding:clamp(7px,1.4vh,13px) 16px;margin-top:clamp(6px,1.2vh,14px);}
+  .comm-meta{margin-top:clamp(6px,1.2vh,16px);gap:6px 16px;}
+
+  /* ── FAQ: two columns so the whole list is visible at once ── */
+  .faq-wrap{max-width:none;}
+  #faq .title{margin-bottom:clamp(4px,1vh,12px);}
+  .faq-list{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(16px,2.4vw,32px);align-items:start;}
+  .faq-item{margin-bottom:clamp(6px,1.3vh,14px);}
+  .faq-q{padding:clamp(9px,1.7vh,22px) 20px;font-size:var(--fs);}
+  .faq-a-in{padding:0 20px clamp(10px,1.8vh,20px);font-size:var(--fs-s);line-height:1.6;}
+  .faq-item.open .faq-a{max-height:420px;}
+
+  /* ── CONTACT ── */
+  .contact-grid{grid-template-columns:.85fr 1.15fr;gap:5vw;align-items:center;}
+  .contact-items{gap:clamp(8px,1.8vh,18px);}
+  .ci-icon{width:clamp(30px,4.6vh,42px);height:clamp(30px,4.6vh,42px);}
+  .ci-text,.ci-text strong{font-size:var(--fs);line-height:1.45;}
+  .contact-form{padding:clamp(12px,2.6vh,32px) clamp(16px,2vw,32px);}
+  .fg{margin-bottom:clamp(6px,1.2vh,14px);}
+  .fg label{margin-bottom:clamp(3px,.6vh,7px);font-size:10.5px;}
+  .fg input,.fg select,.fg textarea{padding:clamp(6px,1.1vh,12px) 14px;font-size:clamp(13px,1.9vh,15px);}
+  .fg textarea{height:clamp(44px,8vh,84px);}
+  .form-row{gap:0 clamp(8px,1vw,14px);}
+  .form-btn{padding:clamp(9px,1.5vh,14px);margin-top:2px;}
+  .popia-note,.form-note{font-size:clamp(10px,1.4vh,11px);margin-top:clamp(5px,1vh,10px);line-height:1.5;}
+  .crisis-note{font-size:clamp(10.5px,1.5vh,12px);margin-top:clamp(6px,1.2vh,14px);padding:clamp(6px,1.1vh,11px) 14px;line-height:1.5;}
+}
+/* shorter laptop screens: drop the decorative wave under section titles to save height */
+@media(min-width:901px) and (min-height:560px) and (max-height:820px){
+  .sec-head .wave-accent,.invest-header .wave-accent{display:none;}
+}
+/* very short windows (small laptops with a full browser toolbar): tighten a little more */
+@media(min-width:901px) and (min-height:560px) and (max-height:700px){
+  :root{--pad:8px;--gap:8px;}
+  .svc{padding:8px 16px;}
+  .svc-desc{line-height:1.4;margin:4px 0;}
+  .svc-tools{padding-top:4px;}
+  .sec-head,.invest-header{margin-bottom:8px;}
+}
 </style>
 </head>
 <body>
@@ -458,7 +613,7 @@ html.no-js .fade{opacity:1;transform:none;}
   <div class="invest-inner fade">
     <div class="invest-header">
       <div class="label">How It Works</div>
-      <h2 class="title" style="color:#fff;">How the work<br>actually happens.</h2>
+      <h2 class="title" style="color:#fff;">How the work<br> actually happens.</h2>
       <p class="sub">The more you put in, the more you get out — though it does ask for real time, honest effort, and emotional energy.</p>
       <svg class="wave-accent on-dark" viewBox="0 0 160 20" width="120" height="15" aria-hidden="true"><path d="M0 12 Q 20 2 40 12 T 80 12 T 120 12 T 160 12" fill="none" stroke="var(--leaf-light)" stroke-width="2" stroke-linecap="round"/></svg>
     </div>
@@ -482,9 +637,9 @@ html.no-js .fade{opacity:1;transform:none;}
 
 <!-- SERVICES -->
 <section id="services">
-  <div style="max-width:560px;margin-bottom:48px;" class="fade">
+  <div class="sec-head fade">
     <div class="label">Services</div>
-    <h2 class="title">What we can<br><em>work on together.</em></h2>
+    <h2 class="title">What we can<br> <em>work on together.</em></h2>
     <p class="sub">Each service is built around practical outcomes. You will leave every session with something concrete: a tool, a reframe, an action step.</p>
     <svg class="wave-accent" viewBox="0 0 160 20" width="120" height="15" aria-hidden="true"><path d="M0 12 Q 20 2 40 12 T 80 12 T 120 12 T 160 12" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"/></svg>
   </div>
@@ -503,9 +658,9 @@ html.no-js .fade{opacity:1;transform:none;}
 
 <!-- COMMUNITY -->
 <section id="community">
-  <div style="max-width:560px;margin-bottom:48px;" class="fade">
+  <div class="sec-head fade">
     <div class="label">Community Work</div>
-    <h2 class="title">Programmes for your community,<br><em>organisation &amp; business.</em></h2>
+    <h2 class="title">Programmes for your community,<br> <em>organisation &amp; business.</em></h2>
     <p class="sub">These programmes are already running and changing lives beyond the therapy room. If you want one for your people, team or community, it can be designed and facilitated accordingly.</p>
     <svg class="wave-accent" viewBox="0 0 160 20" width="120" height="15" aria-hidden="true"><path d="M0 12 Q 20 2 40 12 T 80 12 T 120 12 T 160 12" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"/></svg>
   </div>
@@ -533,16 +688,19 @@ html.no-js .fade{opacity:1;transform:none;}
 <section id="faq">
   <div class="faq-wrap fade">
     <div class="label">FAQ</div>
-    <h2 class="title" style="margin-bottom:32px;">Common questions.</h2>
+    <h2 class="title">Common questions.</h2>
     <svg class="wave-accent" viewBox="0 0 160 20" width="120" height="15" aria-hidden="true"><path d="M0 12 Q 20 2 40 12 T 80 12 T 120 12 T 160 12" fill="none" stroke="var(--leaf)" stroke-width="2" stroke-linecap="round"/></svg>
+    <div class="faq-list"><div class="faq-col">
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What does a session cost?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">Fees are discussed and confirmed when you book. After every session you receive a detailed receipt with everything your medical aid needs for a claim.</div></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What can I expect in the first session?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">Think of the first session as a conversation. We'll talk about what brought you here, I'll ask a few questions to better understand your situation, and we'll both get a feel for each other. I'll explain how I work, and together we'll decide whether it's the right fit. Most people find it far less daunting than they expected.</div></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is everything I share confidential?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">Yes. Confidentiality is fundamental. Everything stays between us, with narrow exceptions required by law, such as imminent risk of serious harm. I explain these at the outset.</div></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do I need to be Jewish or religious to work with you?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">Not at all. My rabbinic background is available when it is relevant and meaningful to you. It is never assumed or imposed. I work with people of all backgrounds.</div></div></div>
+    </div><div class="faq-col">
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How many sessions will I need?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">This varies. My core approach is goal-directed and efficient. Some people see significant shifts in a handful of sessions. Others benefit from longer work. We review progress openly as we go.</div></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I claim from my medical aid?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">The practice is PCNS / BHF registered, so after each session you receive a detailed receipt with everything your medical aid needs. Reimbursement depends on your specific plan and available benefits, so it is worth confirming with your scheme.</div></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you offer online sessions?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">Online sessions are available to all clients, new and existing, anywhere in the world. I work across time zones.</div></div></div>
     <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is your cancellation policy?<div class="faq-chevron">▾</div></button><div class="faq-a"><div class="faq-a-in">24 hours' notice to cancel or reschedule. Late cancellations and no-shows may be charged at the full session rate. I apply this with flexibility where there is a genuine reason.</div></div></div>
+    </div></div>
   </div>
 </section>
 
@@ -567,8 +725,10 @@ html.no-js .fade{opacity:1;transform:none;}
         <div class="fg"><label>First Name</label><input type="text" id="fFirstName" placeholder="Your name" required></div>
         <div class="fg"><label>Last Name</label><input type="text" id="fLastName" placeholder="Your surname" required></div>
       </div>
-      <div class="fg"><label>Email</label><input type="email" id="fEmail" placeholder="your@email.com" required></div>
-      <div class="fg"><label>Phone (optional)</label><input type="tel" id="fPhone" placeholder="+27 ..."></div>
+      <div class="form-row form-row-contact">
+        <div class="fg"><label>Email</label><input type="email" id="fEmail" placeholder="your@email.com" required></div>
+        <div class="fg"><label>Phone (optional)</label><input type="tel" id="fPhone" placeholder="+27 ..."></div>
+      </div>
       <div class="fg"><label>I'm interested in</label>
         <select id="fService"><option value="">Select a service...</option>
           <option>Individual Therapy</option><option>Men's Therapy</option>
